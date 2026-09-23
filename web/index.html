@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rust USDT → ETH Smart Router</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 1050px; margin: 36px auto; padding: 0 20px; background:#ffffff; color:#eee; }
+    .card { background:#1b1b1b; padding:20px; border-radius:12px; margin:16px 0; }
+    input, button { padding:10px 12px; font-size:16px; margin:4px; }
+    button { cursor:pointer; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#090909; padding:14px; border-radius:8px; min-height:80px; }
+    .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    h1 { color:#000000; }
+    .muted { color:#000000; }
+    .warn { color:#ffd479; }
+    .ok { color:#9fe7a4; }
+  </style>
+</head>
+<body>
+  <h1>Routiq CEX/DEX Smart Router</h1>
+  <p class="muted">Current flow: USDT → ETH. Binance Spot vs. Uniswap V3 on Ethereum Mainnet.</p>
+
+  <div class="card">
+    <h2>Status</h2>
+    <button id="healthBtn">Update status</button>
+    <pre id="health">Checking...</pre>
+  </div>
+
+  <div class="card">
+    <h2>MetaMask</h2>
+    <button id="connectWallet">Connect MetaMask    </button>
+    <span id="walletStatus">Not connected</span>
+  </div>
+
+  <div class="card">
+    <h2>Compare Binance × Uniswap</h2>
+    <div class="row">
+      <label>USDT <input id="amount" type="number" step="0.01" min="0.01" value="100" /></label>
+      <button id="quoteBtn">Calculate Best Route      </button>
+    </div>
+    <pre id="result">Waiting...</pre>
+  </div>
+
+  <div class="card">
+    <h2>Execute Best Route</h2>
+    <p class="warn">The API recalculates the route immediately before execution. Binance only executes if ENABLE_LIVE_TRADING=true. Uniswap always requires confirmation in MetaMask.</p>
+    <button id="executeBtn">Execute Best Route</button>
+    <pre id="execution">Waiting...</pre>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
